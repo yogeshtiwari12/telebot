@@ -894,14 +894,19 @@ class DatingBot:
         print("🔹 NO KEYBOARD PANELS - Commands only!")
         print("\nBot is running...")
         
+        # For deployment platforms like Render, we might need to handle ports
+        port = os.getenv('PORT')
+        if port:
+            print(f"🌐 Running on port {port} (for deployment platform)")
+        
         self.application.run_polling()
 
 if __name__ == '__main__':
-    # Replace with your bot token
-    BOT_TOKEN = "7750483935:AAENsDFiOYfB41WcjfzEiTZn1m6ah4-LHYs"
+    # Get bot token from environment variable for security
+    BOT_TOKEN = os.getenv('BOT_TOKEN', '7750483935:AAENsDFiOYfB41WcjfzEiTZn1m6ah4-LHYs')
     
-    if BOT_TOKEN == "YOUR_BOT_TOKEN_HERE":
-        print("❌ Please set your bot token in the BOT_TOKEN variable")
+    if not BOT_TOKEN or BOT_TOKEN == "YOUR_BOT_TOKEN_HERE":
+        print("❌ Please set your bot token in the BOT_TOKEN environment variable")
         print("Get your token from @BotFather on Telegram")
     else:
         bot = DatingBot(BOT_TOKEN)
