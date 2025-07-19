@@ -7,8 +7,8 @@ A Telegram bot for anonymous dating with premium subscriptions. Users can create
 ### Step 1: Prepare Files
 Your repository needs these files (✅ already included):
 - `bot.py` - Main bot code
-- `requirements.txt` - Python dependencies  
-- `runtime.txt` - Python version (python-3.12.0)
+- `requirements.txt` - Python dependencies (python-telegram-bot==21.9)
+- `runtime.txt` - Python version (python-3.11.9)
 - `Procfile` - Start command (web: python bot.py)
 
 ### Step 2: Deploy on Render
@@ -73,6 +73,15 @@ python bot.py
 2. **Bot doesn't start**: Verify BOT_TOKEN environment variable
 3. **Database errors**: SQLite creates automatically
 4. **Port issues**: Render handles ports automatically
+5. **AttributeError with Updater**: Python 3.13 compatibility issue - use Python 3.11.9 (fixed in runtime.txt)
+
+### Specific Error Fixes:
+
+**Error**: `AttributeError: 'Updater' object has no attribute '_Updater__polling_cleanup_cb'`
+**Solution**: 
+- Update `runtime.txt` to `python-3.11.9`
+- Update `requirements.txt` to `python-telegram-bot==21.9`
+- Redeploy the service
 
 ### Check Logs:
 - Go to Render dashboard → Your service → "Logs" tab
